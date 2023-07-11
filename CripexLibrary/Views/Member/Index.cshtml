@@ -1,0 +1,130 @@
+﻿@model CripexLibrary.Models.ViewModels.LibraryViewModel<BookBorrow>
+@{
+    ViewData["Title"] = "Member Dashboard";
+    Layout = "_DashboardLayout";
+}
+
+
+    <div class="pagetitle">
+        <h1>Member Dashboard</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a >Home</a></li>
+                <li class="breadcrumb-item active">Member Dashboard</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section dashboard">
+    <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-12">
+            <div class="row">
+
+                <!-- Sales Card -->
+                <div class="col-xxl-4 col-md-4">
+                    <div class="card info-card sales-card">
+
+                        <div class="card-body">
+                            <h5 class="card-title">Books Borrowed</h5>
+
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-journal-arrow-down"></i>
+                                </div>
+                                <div class="ps-3">
+
+                                     <h6>@ViewBag.totalBooksBorrrow</h6>
+                                    <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div><!-- End Sales Card -->
+                <!-- Revenue Card -->
+                <div class="col-xxl-4 col-md-4">
+                    <div class="card info-card revenue-card">
+
+                        <div class="card-body">
+                            <h5 class="card-title">Books Returned</h5>
+
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-journal-arrow-up"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h6>@ViewBag.booksReturnedCount</h6>
+                                    <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div><!-- End Revenue Card -->
+                <!-- Customers Card -->
+                <div class="col-xxl-4 col-md-4">
+
+                    <div class="card info-card customers-card">                       
+                        <div class="card-body">
+                            <h5 class="card-title">Books to Return</h5>
+
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-journal"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h6>@ViewBag.unReturnedBooks</h6>
+                                    <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div><!-- End Customers Card -->
+                    <!-- Top Selling -->
+                    <div class="col-12">
+                        <div class="card top-selling overflow-auto">
+                            <div class="card-body pb-0">
+                                <h5 class="card-title text-center">Books Borrowed </h5>
+
+                                <table class="table table-borderless">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Preview</th>
+                                            <th scope="col">Book title</th>
+                                            <th scope="col">Author</th>
+                                            <th scope="col">Date Borrowed</th>
+                                            <th scope="col">Due Date</th>
+                                            @*<th>Actions</th>*@
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                         @foreach (var item in Model.Items)
+                                        {
+                                        <tr>
+                                            <th scope="row"><img src="~/images/book-photos/@item.Book.BookImg" alt=""></th>
+                                            <td class="text-primary fw-bold">@item.Book.BookTitle</td>
+                                            <td>@item.Book.Author.AuthorName</td>
+                                            <td class="fw-bold">@item.BorrowDate.ToShortDateString()</td>
+                                            <td class="fw-bold">@item.DueDate.ToShortDateString()</td>
+                                            @*<td>Return Book</td>*@
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                <partial name="_Pagination" model="Model.Pagination" />
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                </div>
+            </div>
+        </div>
+    </section>
+

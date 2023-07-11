@@ -1,0 +1,63 @@
+﻿@model CripexLibrary.Models.ViewModels.LibraryViewModel<Book>
+@{
+	ViewData["Title"] = "Search Results";
+	Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+<div class="pagetitle">
+	<h1>Book Search</h1>
+	<nav>
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a>Home</a></li>
+			<li class="breadcrumb-item">Dashboard</li>
+			<li class="breadcrumb-item active text-primary">Book Search Results</li>
+		</ol>
+	</nav>
+</div>
+<br />
+<br />
+<section class="section dashboard">
+	<div class="col-12">
+		<div class="card top-selling overflow-auto">
+			<div class="card-body pb-0">
+				<h5 class="card-title text-center">Search Result</h5>
+
+				@if (Model.Items.Count() == 0)
+				{
+					<p>No results found.</p>
+				}
+				else
+				{
+					<p>Total item found: @Model.Items.Count()</p>
+					<table class="table table-borderless table-hover">
+						<thead>
+							<tr>
+								<th>Cover</th>
+								<th>Book Title</th>
+								<th>Author</th>
+								<th>Publisher</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var book in Model.Items)
+							{
+								<tr>
+									<td scope="row">
+										@if (!string.IsNullOrEmpty(book.BookImg))
+										{
+											<img src="~/images/book-photos/@book.BookImg" class="img-fluid" width="50" height="25" alt="Book Title: @book.BookTitle" />
+										}
+									</td>
+									<td>@book.BookTitle</td>
+									<td>@book.Author.AuthorName</td>
+									<td>@book.Publisher.PublisherName</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+					<partial name="_Pagination" model="@Model.Pagination" />
+				}
+				
+			</div>
+		</div>
+	</div>
+</section>

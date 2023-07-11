@@ -1,0 +1,69 @@
+﻿@model CripexLibrary.Models.ViewModels.LibraryViewModel<Wishlist>
+@{
+    ViewData["Title"] = "Wishlist";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+<div class="pagetitle">
+    <h1>Wishlist</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item active">My Wishlist</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+<section class="section dashboard">
+    <div class="row">
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Book Image
+            </th>
+            <th>
+               Title
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                Publisher
+            </th>
+            <th>
+
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Items) {
+                    @foreach (var book in item.Books) {
+                        <tr>
+                            <td>
+                                <img src="~/images/book-photos/@book.BookImg" width="60" height="50"/>
+                            </td>
+                            <td>
+                                @book.BookTitle
+                            </td>
+                            <td>
+                                @book.Author.AuthorName
+                            </td>
+                            <td>
+                                @book.Publisher.PublisherName
+                            </td>
+                            <td>
+                                <a asp-controller="Home" asp-action="BookDetail" asp-route-id="@book.Id" asp-route-authorName="@book.Author.AuthorName">View</a> |
+                                <a asp-controller="Member" asp-action="RemoveFromWishList" asp-route-id="@item.Id">Remove</a>
+                            </td>
+                        </tr>
+                    }
+                }
+    </tbody>
+</table>
+<partial name="_Pagination" model="Model.Pagination" />
+</div>
+<br />
+<br />
+</section>

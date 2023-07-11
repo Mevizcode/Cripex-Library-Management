@@ -1,0 +1,108 @@
+﻿@model CripexLibrary.Models.ApplicationUser
+
+@{
+	ViewData["Title"] = "Details";
+	Layout = "_DashboardLayout";
+}
+
+<div class="pagetitle">
+	<h1>Member Details</h1>
+	<nav>
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a>Home</a></li>
+			<li class="breadcrumb-item">Dashboard</li>
+			<li class="breadcrumb-item active">Member Details</li>
+		</ol>
+	</nav>
+</div><!-- End Page Title -->
+<section class="section dashboard">
+	<div class="row">
+		<div class="col-12">
+			<dl class="row">
+				<dt class="col-sm-2">
+					@Html.DisplayNameFor(model => model.Name)
+				</dt>
+				<dd class="col-sm-10">
+					@Html.DisplayFor(model => model.Name)
+				</dd>
+				<dt class="col-sm-2">
+					@Html.DisplayNameFor(model => model.Gender)
+				</dt>
+				<dd class="col-sm-10">
+					@Html.DisplayFor(model => model.Gender)
+				</dd>
+				<dt class="col-sm-2">
+					@Html.DisplayNameFor(model => model.DOB)
+				</dt>
+				<dd class="col-sm-10">
+					@Html.DisplayFor(model => model.DOB)
+				</dd>
+				<dt class="col-sm-2">
+					@Html.DisplayNameFor(model => model.Address)
+				</dt>
+				<dd class="col-sm-10">
+					@Html.DisplayFor(model => model.Address)
+				</dd>
+				<dt class="col-sm-2">
+					@Html.DisplayNameFor(model => model.ProfilePhoto)
+				</dt>
+				<dd class="col-sm-10">
+					<img src="~/images/user-profile-photo/@Html.DisplayFor(model => model.ProfilePhoto)" class="img-fluid" width="150" height="100" />					
+				</dd>
+				<dt class="col-sm-2">
+					@Html.DisplayNameFor(model => model.DateJoined)
+				</dt>
+				<dd class="col-sm-10">
+					@Html.DisplayFor(model => model.DateJoined)
+				</dd>
+				<dt class="col-sm-2">
+					@Html.DisplayNameFor(model => model.UserName)
+				</dt>
+				<dd class="col-sm-10">
+					@Html.DisplayFor(model => model.UserName)
+				</dd>
+				<dt class="col-sm-2">
+					@Html.DisplayNameFor(model => model.Email)
+				</dt>
+				<dd class="col-sm-10">
+					@Html.DisplayFor(model => model.Email)
+				</dd>
+				<dt class="col-sm-2">
+					@Html.DisplayNameFor(model => model.EmailConfirmed)
+				</dt>
+				<dd class="col-sm-10">
+					@Html.DisplayFor(model => model.EmailConfirmed)
+				</dd>
+				<dt class="col-sm-2">
+					@Html.DisplayNameFor(model => model.PhoneNumber)
+				</dt>
+				<dd class="col-sm-10">
+					@Html.DisplayFor(model => model.PhoneNumber)
+				</dd>
+				<dt class="col-sm-2">
+					@Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
+				</dt>
+				<dd class="col-sm-10">
+					@Html.DisplayFor(model => model.PhoneNumberConfirmed)
+				</dd>
+				<dt class="col-sm-2">
+					@Html.DisplayNameFor(model => model.LockoutEnabled)
+				</dt>
+				<dd class="col-sm-10">
+					@Html.DisplayFor(model => model.LockoutEnabled)
+				</dd>
+				<dt class="col-sm-2">
+					@Html.DisplayNameFor(model => model.AccessFailedCount)
+				</dt>
+				<dd class="col-sm-10">
+					@Html.DisplayFor(model => model.AccessFailedCount)
+				</dd>
+			</dl>
+		</div>
+	<div>
+			<a asp-action="EditMember" asp-route-id="@Model?.Id">Edit</a> |
+			<a asp-action="Index">Back to List</a>
+		</div>
+	</div>
+</section>
+

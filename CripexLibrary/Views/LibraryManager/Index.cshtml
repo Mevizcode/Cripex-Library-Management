@@ -1,0 +1,188 @@
+﻿@*@model IEnumerable<CripexLibrary.Models.Book>*@
+@model CripexLibrary.Models.ViewModels.LibraryViewModel<Book>
+@{
+	ViewData["Title"] = "Dashboard";
+	Layout = "_DashboardLayout";
+	//Pagination paging = new Pagination();
+
+	//int pageNo = 0;
+
+	//if (paging != null)
+	//{
+
+	//	//paging = ViewBag.Paging;
+	//	pageNo = paging.CurrentPage;
+	//}
+
+}
+<div class="pagetitle">
+	<h1>Dashboard</h1>
+	<nav>
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a>Home</a></li>
+			<li class="breadcrumb-item active text-primary">Dashboard</li>
+
+		</ol>
+	</nav>
+</div>
+<section class="section dashboard">
+	<div class="row">
+	<div class="col-xxl-3 col-md-3">
+		<div class="card info-card sales-card">
+
+			<div class="card-body">
+				<h5 class="card-title">Books Count</h5>
+
+				<div class="d-flex align-items-center">
+						<div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+						@*<i class="bi bi-people"></i>*@
+							<i class="bi bi-journal-arrow-down"></i>
+						</div>
+					<div class="ps-3">
+
+						<p><b> @ViewBag.bookCount</b></p>
+						<span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<div class="col-xxl-3 col-md-3">
+		<div class="card info-card revenue-card">
+
+			<div class="card-body">
+				<h5 class="card-title">Books Borrowed</h5>
+				<div class="d-flex align-items-center">
+						<div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+						@*<i class="bi bi-people"></i>*@
+							<i class="bi bi-journal-arrow-down"></i>
+						</div>
+					<div class="ps-3">
+						<p><b>@ViewBag.borrowCount </b></p>
+						<span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+		</div> 
+		<div class="col-xxl-3 col-md-3">
+			<div class="card info-card revenue-card">
+
+				<div class="card-body">
+					<h5 class="card-title">Books Returned</h5>
+					<div class="d-flex align-items-center">
+						<div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+							@*<i class="bi bi-books"></i>*@
+							<i class="bi bi-journal-arrow-up"></i>
+						</div>
+						<div class="ps-3">
+							<p><b>@ViewBag.booksReturn </b></p>
+							<span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		
+
+		<div class="col-xxl-3 col-md-3">
+			<div class="card info-card sales-card">
+
+				<div class="card-body">
+					<h5 class="card-title">Books OverDue</h5>
+
+					<div class="d-flex align-items-center">
+						<div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+							@*<i class="bi bi-people"></i>*@
+							<i class="bi bi-journal-x"></i>
+						</div>
+						<div class="ps-3">
+
+							<p><b> @ViewBag.booksOverDue</b></p>
+							<span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<p>
+		<a asp-action="AddBook" class="badge bg-success">Add Book</a>
+	</p>
+	<p class="alert-danger"> @ViewBag.BookDetailsError</p>
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">
+					Image
+				</th>
+				<th scope="col">
+					Book Title
+				</th>
+
+				<th scope="col">
+					Isbn
+				</th>
+
+				<th scope="col">
+					Status
+				</th>
+				<th scope="col">
+					Author
+				</th>
+				<th scope="col">
+					Publisher
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model.Items)
+			{
+				<tr>
+					<td scope="row">
+						@if (!string.IsNullOrEmpty(item.BookImg))
+						{
+							<img src="~/images/book-photos/@item.BookImg" class="img-fluid" width="50" height="25" alt="Book Title: @item.BookTitle" />
+						}
+					</td>
+					<td scope="row">
+						@item.BookTitle
+					</td>
+
+					<td scope="row">
+						@item.Isbn
+					</td>
+
+					<td scope="row">
+						<span class="badge bg-success">@item.Status</span>
+					</td>
+					<td scope="row">
+						@item?.Author?.AuthorName
+					</td>
+					<td scope="row">
+						@item?.Publisher?.PublisherName
+					</td>
+					<td>
+						<a asp-action="EditBook" class="badge bg-success"  asp-route-id="@item?.Id"><i class="bi bi-pencil-square"> Edit</i></a> |
+						<a asp-action="BookDetail" class="badge bg-info" asp-route-id="@item?.Id"><i class="bi bi-clipboard-plus"> Details</i></a> |
+						<a asp-action="DeleteBook" class="badge bg-danger" asp-route-id="@item?.Id" onclick="return confirm('Are you sure you want to delete this book?')"><i class="bi bi-trash3"> Delete</i></a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+	<partial name="_Pagination" model="@Model.Pagination" />
+	<br />
+	<br />
+	<br />
+</section>

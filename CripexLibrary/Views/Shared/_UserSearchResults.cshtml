@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ApplicationUser>
+@{
+	ViewData["Title"] = "User Search Results";
+	Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+<div class="pagetitle">
+	<h1>Search Results</h1>
+	<nav>
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a>Home</a></li>
+			<li class="breadcrumb-item">Dashboard</li>
+			<li class="breadcrumb-item active text-primary">User Search Results</li>
+		</ol>
+	</nav>
+</div>
+<br />
+<br />
+<section class="section dashboard">
+	<div class="col-12">
+		<div class="card top-selling overflow-auto">
+			<div class="card-body pb-0">
+				<h5 class="card-title text-center">User Search Result</h5>
+
+				@if (ViewBag.TotalItems == 0)
+			{
+				<p>No results found.</p>
+			}
+			else
+			{
+					<p>Total item found: @ViewBag.TotalItems</p>
+				<table class="table table-borderless table-hover">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Username</th>
+							<th>Email</th>
+							<th>Role</th>
+							<th>Date Joined</th>
+							
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var user in Model)
+						{
+							<tr>
+								<td>@user.Name</td>
+								<td>@user.UserName</td>
+								<td>@user.Email</td>
+								<td>
+									@foreach (var userRole in user.UserRoles)
+									{
+										@userRole.Role.Name
+										@if (userRole != user.UserRoles.LastOrDefault())
+										{
+											<span>,</span>
+										}
+									}
+								</td>
+								<td>@user.DateJoined.ToShortDateString()</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+					@*<partial name="_Pagination" model="@Model.Pagination" />*@
+			}
+		</div>
+	</div>
+	</div>
+</section>

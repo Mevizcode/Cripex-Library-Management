@@ -1,0 +1,170 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex justify-content-center align-items-center">
+    <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
+        <h1>Learning Today,<br>Leading Tomorrow</h1>
+        <h2>Unleash your creativity with our library.</h2>
+        <a asp-controller="Home" asp-action="Book" class="btn-get-started">Get Started</a>
+    </div>
+</section><!-- End Hero -->
+<main id="main">
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+        <div class="container" data-aos="fade-up">
+
+            <div class="row">
+                <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
+                    <img src="assets/img/about.jpg" class="img-fluid" alt="">
+                </div>
+                <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
+                    <h3>WHO WE ARE?</h3>
+                    <p class="fst-italic">
+                        Cripex Library is more than just a repository of books and information.
+                        Our mission is to empower individuals with the resources and tools they need to learn and grow, and to inspire curiosity and creativity in all who enter our doors.
+                    </p>
+                    <ul>
+                        <li><i class="bi bi-check-circle"></i> We are a community of learners, innovators, and explorers who are passionate about the pursuit of knowledge.</li>
+                        <li><i class="bi bi-check-circle"></i> Our mission is to empower individuals with the resources and tools they need to learn and grow, and to inspire curiosity and creativity in all who enter our doors.</li>
+                    </ul>
+                    <p>
+                        As a leading library in the region, we pride ourselves on our extensive collection of books, journals, and multimedia resources, as well as our state-of-the-art facilities and technology.
+                        Our knowledgeable staff are always on hand to assist with research, answer questions, and provide guidance on the use of our resources.
+                        Whether you are a student, scholar, or simply a curious mind, Cripex Library welcomes you to join our community and discover the world of knowledge that awaits.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End About Section -->
+    <!-- ======= Counts Section ======= -->
+    <section id="counts" class="counts section-bg">
+        <div class="container">
+
+            <div class="row counters">
+
+                <div class="col-lg-4 col-6 text-center">
+                    <span data-purecounter-start="0" data-purecounter-end="1232" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>Librians</p>
+                </div>
+
+                <div class="col-lg-4 col-6 text-center">
+                    <span data-purecounter-start="0" data-purecounter-end="10000" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>Books</p>
+                </div>
+
+                <div class="col-lg-4 col-6 text-center">
+                    <span data-purecounter-start="0" data-purecounter-end="42" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>Events</p>
+                </div>
+
+                @*<div class="col-lg-3 col-6 text-center">
+                <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
+                <p>Trainers</p>
+                </div>*@
+
+            </div>
+
+        </div>
+    </section><!-- End Counts Section -->
+    <!-- ======= Popular Courses Section ======= -->
+    <!-- ======= Gallery Section ======= -->
+  @*  <section id="gallery" class="gallery section-bg">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-header">
+                <h2>gallery</h2>
+                <p>Check <span>Our Gallery</span></p>
+            </div>
+
+            <div class="gallery-slider swiper">
+                <div class="swiper-wrapper align-items-center">
+                    <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="~/assets/img/course-1.jpg"><img src="~/assets/img/course-1.jpg" class="img-fluid" alt=""></a></div>
+                    <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="~/assets/img/course-1.jpg"><img src="~/assets/img/course-1.jpg" class="img-fluid" alt=""></a></div>
+                    <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="~/assets/img/course-1.jpg"><img src="~/assets/img/course-1.jpg" class="img-fluid" alt=""></a></div>
+                    <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="~/assets/img/course-1.jpg"><img src="~/assets/img/course-1.jpg" class="img-fluid" alt=""></a></div>
+@*                    <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="~/assets/img/gallery/gallery-2.jpg"><img src="~/assets/img/gallery/gallery-2.jpg" class="img-fluid" alt=""></a></div>
+                    <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="~/assets/img/gallery/gallery-3.jpg"><img src="~/assets/img/gallery/gallery-3.jpg" class="img-fluid" alt=""></a></div>
+                    <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="~/assets/img/gallery/gallery-4.jpg"><img src="~/assets/img/gallery/gallery-4.jpg" class="img-fluid" alt=""></a></div>
+                    <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="~/assets/img/gallery/gallery-5.jpg"><img src="~/assets/img/gallery/gallery-5.jpg" class="img-fluid" alt=""></a></div>
+                    <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="~/assets/img/gallery/gallery-6.jpg"><img src="~/assets/img/gallery/gallery-6.jpg" class="img-fluid" alt=""></a></div>
+                    <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="~/assets/img/gallery/gallery-7.jpg"><img src="~/assets/img/gallery/gallery-7.jpg" class="img-fluid" alt=""></a></div>
+                    <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="~/assets/img/gallery/gallery-8.jpg"><img src="~/assets/img/gallery/gallery-8.jpg" class="img-fluid" alt=""></a></div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+
+        </div>
+    </section><!-- End Gallery Section -->*@
+    <section id="popular-courses" class="courses">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>Books</h2>
+                <p>Popular Books</p>
+            </div>
+
+            <div class="row" data-aos="zoom-in" data-aos-delay="100">
+
+                @foreach (var item in ViewBag.FeaturedBooks) { 
+                    <div class="col-lg-3 col-md-5 d-flex align-items-stretch mt-4 mt-md-0 mb-5">
+                    <div class="course-item">
+                        <a asp-controller="Home" asp-action="BookDetail" asp-route-id="@item.Id" asp-route-authorName="@item.Author.AuthorName">
+                            <img src="~/images/book-photos/@item.BookImg" class="img-fluid" width="200px;" height="150px;" alt="@item.BookTitle">
+                        </a>
+                           <div class="mt-3">
+                                <h6 class="p-2">@item.Author.AuthorName</h6>
+                                
+                           </div>
+                        @*<div class="course-content">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                
+                                <h4>@item.Status</h4>
+                            </div>
+                        </div>*@
+                    </div>
+                </div> <!-- End Course Item-->
+                }
+              
+            </div>
+
+        </div>
+    </section><!-- End Popular Courses Section -->
+
+   @* <section id="popular-courses" class="trainers">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+               @* <h2>Books</h2>
+                <p>Best Borrowed Books</p>
+            </div>
+
+            <div class="row" data-aos="zoom-in" data-aos-delay="100">
+                @foreach (var item in ViewBag.MostBorrowedBooks)
+                {
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                    <div class="member">
+                        <a asp-controller="Home" asp-action="BookDetail" asp-route-id="@item.Book.Id" asp-route-authorName="@item.Book.Author.AuthorName">
+                                <img src="~/images/book-photos/@item.Book.BookImg" class="img-fluid" width="200px;" height="150px;" alt="">
+                            </a>
+                        <div class="member-content">
+                                <h4>@item.Book.BookTitle</h4>
+                                <span>@item.Book.Author.AuthorName</span>
+                                @item.Book.BookDescription.Substring(0, item.Book.BookDescription.IndexOfAny(new char[] { '.', ',' }) + 1)
+                            <div class="social">
+                                <a href=""><i class="bi bi-twitter"></i></a>
+                                <a href=""><i class="bi bi-facebook"></i></a>
+                                <a href=""><i class="bi bi-instagram"></i></a>
+                                <a href=""><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                }
+                </div>
+                </div>
+                </section>*@
+</main>

@@ -1,0 +1,106 @@
+﻿@model CripexLibrary.Models.ViewModels.LibraryViewModel<Book>
+
+@{
+	ViewData["Title"] = "Book";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+	.input-container {
+		position: relative;
+		width:250px;
+		float:right;
+
+	}
+
+	.input-icon {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		right: 10px;
+		pointer-events: none;
+	}
+
+		.input-icon i {
+			color: #aaa;
+		}
+
+</style>
+<main id="main" class="container-fluid">
+	<section id="popular-courses" class="courses">
+		<div class="container" data-aos="fade-up">
+
+			<div class="section-title">
+				<h2>Books</h2>
+
+				<br />
+				@if (TempData["SuccessMessage"] != null)
+				{
+					<script>
+						$(document).ready(function () {
+							Swal.fire({
+								title: 'Success!',
+								text: '@TempData["SuccessMessage"]',
+								icon: 'success',
+								confirmButtonText: 'OK'
+							});
+						});
+					</script>
+				}
+			</div>
+
+			<div class="row mb-5" data-aos="zoom-in" data-aos-delay="100">
+				
+				<form asp-action="Search" asp-controller="Home">
+						<div class="input-container">
+						<input  class="form-control" name="query" autocomplete="on" placeholder="Type to search..."> 
+						<span class="input-icon"><i class="bi bi-search"></i></span>
+					
+
+							<button type="submit" title="Search"></button>
+						
+						</div>							
+				</form>
+				
+				@foreach (var item in Model.Items)
+				{
+					<div class="col-lg-3 col-md-6 d-flex align-items-stretch pt-5 pb-5">
+
+						<div class="course-item">
+							<a asp-controller="Home" asp-action="BookDetail" asp-route-id="@item.Id" asp-route-authorName="@item.Author.AuthorName">
+								<img src="~/images/book-photos/@Html.DisplayFor(modelItem => item.BookImg)" class="img-fluid" width="300px;" height="200px;" alt="Book Title: @item.BookTitle">
+							</a>
+							<div class="course-content">
+								<h6 class="">@item.BookTitle </h6>
+								<p>@item.Author.AuthorName </p>
+								<div class="d-flex justify-content-between align-items-center mb-3">
+									<div class="action">
+										@if (@item.Status == CripexLibrary.Models.Enums.Status.Available)
+										{
+											<p>@item.Status</p>
+
+										}
+										@*<div>
+									<button class="btn btn-primary mt-4"><i class="bi bi-eye"></i></button>
+									<button class="btn btn-outline-primary mt-4"><i class="bi bi-cart-plus"></button>
+									</div>*@
+										@*                                        <a class="btn btn-sm float-right" asp-controller="Books" asp-action="Borrow" asp-route-bookId="@item.BookID.ToString()" style="background-color: #5fcf80;">Borrow Book</a>
+									*@
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+				}
+			</div>
+
+			<partial name="_Pagination" model="Model.Pagination" />
+			<br />
+			<br />
+			<br />
+		</div>
+	</section>
+</main>

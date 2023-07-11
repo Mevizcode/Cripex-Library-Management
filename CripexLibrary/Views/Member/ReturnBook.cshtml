@@ -1,0 +1,73 @@
+﻿@model IEnumerable<CripexLibrary.Models.BookBorrow>
+
+@{
+    ViewData["Title"] = "Books to Return";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="pagetitle">
+    <h1>Books to Return</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item active">Books to Return</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+<br />
+<section class="section dashboard">
+    <div class="row">
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">
+               Preview
+            </th>
+            <th scope="col">
+                Book Title
+            </th>
+            <th scope="col">
+                Book Copy
+            </th>
+            <th scope="col">
+               Borrow Date
+            </th>
+            <th scope="col">
+                Return Date
+            </th>
+            <th scope="col">
+                Due Date
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td scope="row">
+                            <img src="~/images/book-photos/@item.Book.BookImg" width="60" height="50" alt="Book Title: @item.Book.BookTitle" />
+            </td>
+            <td scope="row">
+                @item.Book.BookTitle
+            </td>
+            <td scope="row">
+                @item.BookCopy.CopyNumber
+            </td>
+            <td scope="row">
+                @item.BorrowDate.ToLongDateString()
+            </td>
+            <td scope="row">
+                @item.ReturnDate
+            </td>
+            <td scope="row">
+                @item.DueDate.ToLongDateString()
+            </td>
+            <td>
+                <a class="btn btn-warning" asp-action="ReturnBorrowedBook" asp-controller="Member" asp-route-id="@item.Id">Return Book</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>
+</section>

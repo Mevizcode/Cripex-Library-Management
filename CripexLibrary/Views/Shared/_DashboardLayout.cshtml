@@ -1,0 +1,316 @@
+﻿@using System.Security.Claims;
+@{
+	var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - Cripex Library</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/CripexLibrary.styles.css" asp-append-version="true" />
+	<!-- Google Fonts -->
+	<link href="https://fonts.gstatic.com" rel="preconnect">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
+	<!-- Vendor CSS Files -->
+	<link href="~/Dashboard/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="~/Dashboard/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+	<link href="~/Dashboard/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+	<link href="~/Dashboard/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+	<link href="~/Dashboard/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+	<link href="~/Dashboard/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+	<link href="~/Dashboard/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+	<!-- Template Main CSS File -->
+	<link href="~/Dashboard/assets/css/style.css" rel="stylesheet">
+
+</head>
+<body>
+	<!-- ======= Header ======= -->
+	<header id="header" class="header fixed-top d-flex align-items-center">
+
+		<div class="d-flex align-items-center justify-content-between">
+			<a asp-action="Index" asp-controller="Home" class="logo d-flex align-items-center">
+				@*<img src="assets/img/logo.png" alt="">*@
+				<span class="d-none d-lg-block">Cripex Library</span>
+			</a>
+			<i class="bi bi-list toggle-sidebar-btn"></i>
+		</div><!-- End Logo -->
+		@if (User.IsInRole("ADMIN"))
+		{
+			<div class="search-bar">
+				<form class="search-form d-flex align-items-center" asp-action="Search" asp-controller="Admin">
+					<input type="text" name="query" placeholder="Search" title="Enter search keyword">
+					<button type="submit" title="Search"><i class="bi bi-search"></i></button>
+				</form>
+			</div>
+
+			<!-- End Search Bar -->
+		}
+		else if (User.IsInRole("LIBRARIAN"))
+		{
+			<div class="search-bar">
+				<form class="search-form d-flex align-items-center" asp-action="Search" asp-controller="LibraryManager">
+					<input type="text" name="query" placeholder="Search" title="Enter search keyword">
+					<button type="submit" title="Search"><i class="bi bi-search"></i></button>
+				</form>
+			</div>
+
+			<!-- End Search Bar -->
+		}
+		else
+		{
+
+		<div class="search-bar">
+				<form class="search-form d-flex align-items-center">
+					<input type="text" name="query" placeholder="Search" title="Enter search keyword">
+					<button type="submit" title="Search"><i class="bi bi-search"></i></button>
+				</form>
+			</div>
+
+			<!-- End Search Bar -->
+		}
+
+		<nav class="header-nav ms-auto">
+			<ul class="d-flex align-items-center">
+
+				<li class="nav-item d-block d-lg-none">
+					<a class="nav-link nav-icon search-bar-toggle">
+						<i class="bi bi-search"></i>
+					</a>
+				</li><!-- End Search Icon-->
+
+
+				<partial name="_LoginPartial.cshtml" />
+			</ul>
+		</nav><!-- End Icons Navigation -->
+
+	</header><!-- End Header -->
+	<!-- ======= Sidebar ======= -->
+	<aside id="sidebar" class="sidebar">
+
+		<ul class="sidebar-nav" id="sidebar-nav">
+			<li class="nav-item">
+				<a class="nav-link collapsed" asp-action="Index" asp-controller="Home">
+					<i class="bi bi-house"></i>
+					<span>Home</span>
+				</a>
+			</li>
+			@if (User.IsInRole("MEMBER"))
+			{
+				<li class="nav-heading text-info">Member</li>
+
+				<li class="nav-item">
+					<a class="nav-link collapsed" asp-action="Index" asp-controller="Member">
+						
+						<i class="bi bi-grid"></i>
+						<span>Member Dashboard</span>
+					</a>
+				</li>
+
+				<!-- End Profile Page Nav -->
+
+
+				<li class="nav-item">
+					<a class="nav-link collapsed" asp-action="ReturnBook" asp-controller="Member">
+						
+						<i class="bi bi-journal-arrow-up"></i>
+						<span>Books to Return</span>
+					</a>
+				</li>
+
+				@*<li class="nav-item">
+					<a class="nav-link collapsed" asp-action="Wishlist" asp-controller="Member">
+						
+						<i class="bi bi-bag-heart-fill"></i>
+						<span>Wishlist</span>
+					</a>
+				</li>*@
+
+				<!-- End Profile Page Nav -->
+				
+				<li class="nav-item">
+					<a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" aria-expanded="true">
+						<i class="bi bi-person-fill-gear"></i>
+						<span>Account Settings</span>
+						<i class="bi bi-chevron-down ms-auto"></i>
+					</a>
+					<ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav" >
+						<li>
+							<a class="nav-link collapsed" asp-action="EditAccount" asp-controller="Member" asp-route-Id="@userId">
+								
+								<i class="bi bi-person-circle" style="font-size: 16px;"></i>
+								<span>Account</span>
+								
+							</a>
+						</li>
+						
+						@*<li>
+						
+							<a class="nav-link collapsed" asp-action="UpdateEmail" asp-controller="Member" asp-route-Id="@userId">
+								<i class="bi bi-envelope-at" style="font-size: 16px;"></i><span>Change Email</span>
+							</a>
+						</li>
+						<li>
+							<a class="nav-link collapsed" asp-action="UpdatePassword" asp-controller="Member" asp-route-Id="@userId">
+								<i class="bi bi-shield-check" style="font-size: 16px;"></i><span>Change Password</span>
+							</a>
+						</li>*@
+					</ul>
+				</li>
+
+				
+			}
+			@if (User.IsInRole("ADMIN"))
+			{
+				<li class="nav-heading text-info">Admin</li>
+				<li class="nav-item">
+					<a class="nav-link" asp-action="Index" asp-controller="Admin">
+						<i class="bi bi-grid"></i>
+						<span>Dashboard</span>
+					</a>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link collapsed" asp-action="Roles" asp-controller="Admin">
+						<i class="bi bi-award"></i>
+						<span>Roles</span>
+					</a>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link collapsed" asp-action="AddMember" asp-controller="Admin">
+						<i class="bi bi-person-add"></i>
+						<span>Add Member</span>
+					</a>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link collapsed" asp-action="AddRole" asp-controller="Admin">
+						<i class="ri-shield-user-line"></i>
+						<span>Add Roles</span>
+					</a>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link collapsed" asp-action="AddMemberToRole" asp-controller="Admin">
+						<i class="ri-admin-line"></i>
+						<span>Assign Role to Member</span>
+					</a>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link collapsed" asp-action="UsersInRole" asp-controller="Admin">
+						<i class="ri-admin-line"></i>
+						<span>Members In Role</span>
+					</a>
+				</li>
+
+			}
+
+			@if (User.IsInRole("LIBRARIAN"))
+			{
+				<li class="nav-heading text-info">Library Manager</li>
+
+				<li class="nav-item">
+					<a class="nav-link collapsed" asp-action="Index" asp-controller="LibraryManager">
+						<i class="bi bi-journals"></i>
+						<span>Books</span>
+					</a>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link collapsed" asp-action="ListAuthor" asp-controller="LibraryManager">
+						<i class="bi bi-person-lines-fill"></i>
+						<span>Authors</span>
+					</a>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link collapsed" asp-action="ListPublisher" asp-controller="LibraryManager">
+						<i class="bi bi-award"></i>
+						<span>Publishers</span>
+					</a>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link collapsed" asp-action="ListCategory" asp-controller="LibraryManager">
+						<i class="bi bi-bookmarks-fill"></i>
+					<span>Categories</span>
+					</a>
+				</li>
+				<li class="nav-heading text-info">Books Inventory</li>
+				<li class="nav-item">
+					<a class="nav-link collapsed" asp-action="BooksBorrowed" asp-controller="LibraryManager">
+						<i class="bi bi-journal-arrow-down"></i>
+						<span>Books Borrowed</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link collapsed" asp-action="BookToReturn" asp-controller="LibraryManager">
+						<i class="bi bi-journal-arrow-up"></i>
+						<span>Books To Return</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link collapsed" asp-action="BookOverdue" asp-controller="LibraryManager">
+						<i class="bi bi-journal-x"></i>
+						<span>Books Overdue</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link collapsed" asp-action="BooksNotAvailable" asp-controller="LibraryManager">
+						<i class="bi bi-journal-minus"></i>
+						<span>Books Unavailable</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link collapsed" asp-action="BooksReturned" asp-controller="LibraryManager">
+						<i class="bi bi-arrow-return-right"></i>
+						<span>Books Returned</span>
+					</a>
+				</li>
+			}
+		</ul>
+
+	</aside><!-- End Sidebar-->
+	<main id="main" class="main">
+		@RenderBody()
+	</main>
+	<br />
+	<br />
+	<footer id="footer" class="footer">
+		<div class="copyright">
+			&copy; Copyright <strong><span>Cripex Library</span></strong>. All Rights Reserved
+		</div>
+		<div class="credits">
+			<!-- All the links in the footer should remain intact. -->
+			<!-- You can delete the links only if you purchased the pro version. -->
+			<!-- Licensing information: https://bootstrapmade.com/license/ -->
+			<!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+			@* Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>*@
+		</div>
+	</footer><!-- End Footer -->
+
+	<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+	<!-- Vendor JS Files -->
+	<script src="~/Dashboard/assets/vendor/apexcharts/apexcharts.min.js"></script>
+	<script src="~/Dashboard/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="~/Dashboard/assets/vendor/chart.js/chart.umd.js"></script>
+	<script src="~/Dashboard/assets/vendor/echarts/echarts.min.js"></script>
+	<script src="~/Dashboard/assets/vendor/quill/quill.min.js"></script>
+	<script src="~/Dashboard/assets/vendor/simple-datatables/simple-datatables.js"></script>
+
+	<!-- Template Main JS File -->
+	<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.js'></script>
+	<script src="~/Dashboard/assets/js/main.js"></script>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

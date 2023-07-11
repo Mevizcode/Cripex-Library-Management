@@ -1,0 +1,52 @@
+﻿@{
+	ViewData["Title"] = "Members In Role";
+	Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+<div class="pagetitle">
+	<h1>Members In Role</h1>
+	<nav>
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a>Home</a></li>
+			<li class="breadcrumb-item">Dashboard</li>
+			<li class="breadcrumb-item active text-primary">Members In Role</li>
+		</ol>
+	</nav>
+</div>
+<section class="section dashboard">
+	<div class="row">
+		<div class="col-md-4">
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>
+							Member and Roles
+						</th>
+
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in ViewBag.usersAndRoles)
+					{
+						<tr>
+							<td>
+								@item
+							</td>
+						</tr>
+						@*<tr>
+							<td>
+								<form asp-action="RemoveMemberFromRole" method="post">
+									<input type="hidden" name="userId" value="@ViewBag.UserId" />
+									<input type="hidden" name="roleName" value="@ViewBag.RoleName" />
+									<button type="submit">Remove from Role</button>
+								</form>
+							</td>
+						</tr>*@
+					}
+				</tbody>
+			</table>
+
+		</div>
+	</div>
+</section>

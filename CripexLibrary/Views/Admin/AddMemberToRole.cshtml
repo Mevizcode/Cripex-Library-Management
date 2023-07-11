@@ -1,0 +1,56 @@
+﻿@model CripexLibrary.Models.ViewModels.AddMemberToRoleViewModel
+
+@{
+    ViewData["Title"] = "Add Member To Role";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="pagetitle">
+    <h1>Add Member Role</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item">Dashboard</li>
+            <li class="breadcrumb-item active text-primary">Add Member To Role</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+<section class="section dashboard">
+    <div class="row">
+        <div class="col-md-4">
+        <form asp-action="AddMemberToRole">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Users" class="control-label">User: </label>
+                <select name="userName" class ="form-control">
+
+                        @foreach (var user in Model.Users)
+                        {
+                            <option asp-for="userName" name="userName" value="@user">@user</option>
+                        }
+                </select>
+            </div>
+            <div class="form-group mt-3">
+                <label asp-for="Roles" class="control-label">Role: </label>
+                <select name="roleName" class ="form-control">
+                        @foreach (var role in Model.Roles)
+                        {
+                            <option asp-for="roleName" name="roleName" value="@role">@role</option>
+                        }
+                </select>
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" value="Add To Role" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+</section>

@@ -1,0 +1,67 @@
+﻿@model CripexLibrary.Models.ViewModels.LibraryViewModel<BookBorrow>
+
+@{
+    ViewData["Title"] = "Books Returned";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+<div class="pagetitle">
+    <h1>Books Returned</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item">Dashboard</li>
+            <li class="breadcrumb-item">Books Inventory</li>
+            <li class="breadcrumb-item active text-primary">Books Returned</li>
+        </ol>
+    </nav>
+</div>
+<section class="section dashboard">
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Book Cover
+            </th>
+            <th>
+                Book Title
+            </th>
+            <th>
+                BookCopy
+            </th>
+            <th>
+                BorrowDate
+            </th>
+            <th>
+                ReturnDate
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Items) {
+        <tr>
+            <td>
+                   
+               <img src="~/images/book-photos/@item.Book.BookImg" width="60" height="50" />
+                    
+            </td>
+            <td>
+                @item.Book.BookTitle
+            </td>
+            <td>
+                @item.BookCopy.CopyNumber
+            </td>
+            <td>
+                @item.BorrowDate.ToShortDateString()
+            </td>
+            <td>
+                @item.ReturnDate
+            </td>
+            
+        </tr>
+}
+    </tbody>
+</table>
+    <partial name="_Pagination" model="Model.Pagination" />
+    <br />
+    <br />
+</section>

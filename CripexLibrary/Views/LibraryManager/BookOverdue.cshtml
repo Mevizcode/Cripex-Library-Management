@@ -1,0 +1,87 @@
+﻿@model CripexLibrary.Models.ViewModels.LibraryViewModel<BookBorrow>
+@*@using CripexLibrary.Controllers;
+@inject LibraryManagerController lmc*@
+@{
+    ViewData["Title"] = "Books Overdue";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+<div class="pagetitle">
+    <h1>Books Overdue</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item">Dashboard</li>
+            <li class="breadcrumb-item">Books Inventory</li>
+            <li class="breadcrumb-item active text-primary">Books Overdue</li>
+        </ol>
+    </nav>
+</div>
+<section class="section dashboard">
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Borrower
+            </th>
+            <th>
+                Book 
+            </th>
+            <th>
+               Book Copy Number
+            </th>
+            <th>
+               Borrow Date
+            </th>
+            <th>
+                Due Date
+            </th>
+            <th>
+                Days Overdue
+            </th> 
+            <th>
+                Send Overdue Email
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Items) {
+        <tr>
+            <td>
+                @item.User.UserName
+            </td>
+            <td>
+                <img src="~/images/book-photos/@item.Book.BookImg" width="60" height="50" />
+            </td>
+            <td>
+                @item.BookCopy.CopyNumber
+            </td>
+            <td>
+                @item.BorrowDate.ToShortDateString()
+            </td>
+            <td>
+                @item.DueDate.ToShortDateString()
+            </td>
+            <td>
+                @if (item.ReturnDate == null && item.DueDate < DateTime.Now)
+                 {
+                            <p>@(DateTime.Now.Subtract(item.DueDate).Days) days overdue</p>
+                        }
+                        else
+                        {
+                            <p>@(DateTime.Now.Subtract(item.DueDate).Days) days overdue</p>
+                        }
+                    </td> 
+        <td>
+           @using(Html.BeginForm("SendOverDueEmail", "LibraryManager", FormMethod.Post))
+                        {
+                            <button type="submit" class="btn btn-primary">Send Email</button>
+                        }
+                    </td>
+        </tr>
+}
+    </tbody>
+</table>
+    <partial name="_Pagination" model="Model.Pagination" />
+    <br />
+    <br />
+</section>

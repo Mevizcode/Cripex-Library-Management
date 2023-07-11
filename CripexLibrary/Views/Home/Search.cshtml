@@ -1,0 +1,48 @@
+﻿@model CripexLibrary.Models.ViewModels.LibraryViewModel<Book>
+
+@{
+	ViewData["Title"] = "Search";
+	Layout = Layout;
+}
+
+<main id="main" class="container-fluid">
+	<section id="popular-courses" class="courses">
+		<div class="container" data-aos="fade-up">
+
+			<div class="section-title">
+				<h2>Book Search</h2>
+			</div>
+
+			<div class="row">
+			@foreach (var item in Model.Items)
+			{
+				<div class="col-lg-3 col-md-6 d-flex align-items-stretch pt-5 pb-5">
+
+					<div class="course-item">
+						<a asp-controller="Home" asp-action="BookDetail" asp-route-id="@item.Id" asp-route-authorName="@item.Author.AuthorName">
+							<img src="~/images/book-photos/@Html.DisplayFor(modelItem => item.BookImg)" class="img-fluid" width="300px;" height="200px;" alt="Book Title: @item.BookTitle">
+						</a>
+						<div class="course-content">
+							<h6 class="">@item.BookTitle </h6>
+							<p>@item.Author.AuthorName </p>
+							<div class="d-flex justify-content-between align-items-center mb-3">
+								<div class="action">
+									@if (@item.Status == CripexLibrary.Models.Enums.Status.Available)
+									{
+										<p>@item.Status</p>
+
+									}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+			</div>
+			<partial name="_Pagination" model="Model.Pagination" />
+			<br />
+			<br />
+			<br />
+		</div>
+	</section>
+</main>

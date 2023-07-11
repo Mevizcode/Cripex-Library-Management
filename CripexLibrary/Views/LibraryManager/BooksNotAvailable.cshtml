@@ -1,0 +1,54 @@
+﻿@model CripexLibrary.Models.ViewModels.LibraryViewModel<BookCopy>
+@{
+	ViewData["Title"] = "Books Unavailable";
+	Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+<div class="pagetitle">
+	<h1>Books Unavailable</h1>
+	<nav>
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a>Home</a></li>
+			<li class="breadcrumb-item">Dashboard</li>
+			<li class="breadcrumb-item">Books Inventory</li>
+			<li class="breadcrumb-item active text-primary">Books Unavailable</li>
+		</ol>
+	</nav>
+</div>
+<section class="section dashboard">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					Book
+				</th>
+				<th>
+					Book Title
+				</th>
+				<th>
+					Status
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model.Items)
+			{
+				<tr>
+					<td>
+						<img src="~/images/book-photos/@item.Book.BookImg" width="60" height="50" />
+					</td>
+					<td>
+						@item.Book.BookTitle
+					</td>
+					<td>
+						@item.Status
+					</td>
+
+				</tr>
+			}
+		</tbody>
+	</table>
+	<partial name="_Pagination" model="Model.Pagination" />
+	<br />
+	<br />
+</section>

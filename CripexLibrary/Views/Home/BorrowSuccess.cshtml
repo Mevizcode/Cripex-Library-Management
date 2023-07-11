@@ -1,0 +1,29 @@
+﻿@model CripexLibrary.Models.BookBorrow
+
+@{
+    ViewData["Title"] = "Borrow Success";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container my-5">
+    
+    <div class="row">
+        <h3>Book Borrowed Successfully</h3>
+        <p>You have successfully borrowed the book: <strong>@Model.Book.BookTitle</strong></p>
+        <div class="col-md-3">
+            <img src="~/images/book-photos/@Html.DisplayFor(model => model.Book.BookImg)" alt="@Html.DisplayFor(model => model.Book.BookTitle)" class="img-fluid w-100">
+        </div>
+        <div class="col-md-9">
+            <p>The book was borrowed on: @Model.BorrowDate.ToShortDateString()</p>
+            <p>Please return this book on or before: @Model.DueDate.ToShortDateString()</p>
+            <p><strong>Author: </strong> @Html.DisplayFor(model => model.Book.Author.AuthorName)</p>
+            <p><strong>Publisher: </strong> @Html.DisplayFor(model => model.Book.Publisher.PublisherName)</p>
+            <p><strong>ISBN: </strong> @Html.DisplayFor(model => model.Book.Isbn)</p>
+            <p class="mt-2"><strong>Book Description:</strong></p>
+            <p class="mt-2"> @Html.DisplayFor(model => model.Book.BookDescription)</p>
+            <p><a asp-action="Index" asp-controller="Member">Go to dashboard</a> </p>
+            <p><a asp-action="BookDetail" asp-controller="Home">Go back</a> </p>
+        </div>
+    </div>
+</div>
+<h1></h1>
+
