@@ -1,4 +1,4 @@
-# Cripex Library Using ASP.NET
+# Cripex Library Management
 
 Cripex is a library management system built using ASP.NET. It provides a simple and efficient way to manage library operations, including book management, member management, and transaction tracking. This project utilizes the ASP.NET Core framework for backend development, and aims to offer a user-friendly platform for library staff to manage daily operations.
 
